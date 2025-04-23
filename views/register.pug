@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 Регистрация
+  form(method="POST", action="/users/register")
+    div
+      label(for="username") Потребителско име:
+      input(type="text", name="username", required)
+    div
+      label(for="password") Парола:
+      input(type="password", name="password", required)
+    div
+      button(type="submit") Регистрация
+  p
+    | Вече имате акаунт?<br>
+    a(href="/users/login") Вход
