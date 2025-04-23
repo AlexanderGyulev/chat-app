@@ -30,7 +30,6 @@ io.on('connection', (socket) => {
 
   socket.on('user joined', (username) => {
     socket.username = username;
-    io.emit('system message', `${username} влезе в чата.`);
 
     db.all(`SELECT username, message FROM messages ORDER BY id DESC LIMIT 20`, (err, rows) => {
       if (err) {
@@ -38,8 +37,10 @@ io.on('connection', (socket) => {
         return;
       }
 
-      rows.reverse(); 
+      rows.reverse();
       socket.emit('chat history', rows);
+
+      io.emit('system message', `${username} влезе в чата.`);
     });
   });
 
